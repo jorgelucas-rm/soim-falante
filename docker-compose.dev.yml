@@ -1,4 +1,12 @@
 services:
+  backend:
+    container_name: soimfalante-backend
+    ports:
+      - "8080:8080"
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: always
 
   database:
     image: postgres:18
@@ -8,7 +16,7 @@ services:
       - "5433:5432"
     env_file: ./backend/src/environments/.env
     volumes:
-      - /data/projects/soim-falante/postgresql:/var/lib/postgresql
+      - ./postgresql:/var/lib/postgresql
   
   minio:
     container_name: soimfalante-minio
@@ -23,5 +31,5 @@ services:
       --address ":9000"
       --console-address ":9001"
     volumes:
-      - /data/projects/soim-falante/minio:/data
+      - ./minio:/data
 
