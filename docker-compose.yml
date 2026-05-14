@@ -1,0 +1,15 @@
+services:
+
+  database:
+    image: postgres:18
+    container_name: soimfalante-database
+    restart: always
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: ${DATABASE_NAME:?DATABASE_NAME must be set}
+      POSTGRES_USER: ${DATABASE_USER:?DATABASE_USER must be set}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:?DATABASE_PASSWORD must be set}
+    volumes:
+      - /data/projects/soim-falante/postgresql:/var/lib/postgresql
+
